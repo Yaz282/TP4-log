@@ -35,27 +35,38 @@ void Lecture::Lire()
     if(file)
     {
         getline(file,texte,' ');
-        ligne.setIPAdress(texte);
+        ligne.IPAdress=texte;
         getline(file,texte,' ');
-        ligne.setUserLogname(texte);
+        ligne.UserLogname=texte;
         getline(file,texte,' ');
-        ligne.setAuthenticatedUser(texte);
-        getline(file,texte,'GET ');
+        ligne.AuthenticatedUser=texte;
+        getline(file,texte,'[');
+        getline(file,texte,']');
+        ligne.Date=texte;
+        getline(file,texte,'"');
         getline(file,texte,' ');
-        ligne.setDestUrl(texte);
+        getline(file,texte,' ');
+        ligne.DestUrl=texte;
+        getline(file,texte,'"');
         getline(file,texte,' ');
         getline(file,texte,' ');
-        ligne.setReturnCode(texte);
+        ligne.ReturnCode=texte;
         getline(file,texte,' ');
-        ligne.setDataTransfered(texte);
-        //getline(file,texte,'.fr');
-        getline(file,texte,' ');
-        ligne.setReferer(texte);
-        getline(file,texte,' ');
-        ligne.setClientNavigateur(texte);
+        ligne.DataTransfered=texte;
+        getline(file,texte,'"');
+        getline(file,texte,'"');
+        ligne.Referer=texte;
+        getline(file,texte,'"');
+        getline(file,texte,'"');
+        ligne.ClientNavigateur=texte;
 
     }
 
+}
+
+string Lecture::getIPAdress()
+{
+    return ligne.IPAdress;
 }
 
 
@@ -99,7 +110,7 @@ Lecture::~Lecture ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Lecture>" << endl;
 #endif
-    file.close(nomFichier);
+    file.close();
 } //----- Fin de ~Lecture
 
 

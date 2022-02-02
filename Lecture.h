@@ -41,6 +41,8 @@ public:
     // Contrat :
     //
 
+    string getIPAdress();
+
 
 //------------------------------------------------- Surcharge d'opérateurs
    // Lecture & operator = ( const Lecture & unLecture );
@@ -57,7 +59,7 @@ public:
     // Contrat :
     //
 
-    Lecture ( );
+    Lecture ( string nomFichier );
     // Mode d'emploi :
     //
     // Contrat :

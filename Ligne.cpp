@@ -28,7 +28,7 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-    void Ligne::setIPAdress(string s){
+    /*void Ligne::setIPAdress(string s){
         IPAdress=s;
     }
     void Ligne::setUserLogname(string s){
@@ -54,6 +54,11 @@ using namespace std;
     }
     void Ligne::setClientNavigateur(string s){
         ClientNavigateur=s;
+    }*/
+
+    string Ligne::getIPAdress()
+    {
+        return IPAdress;
     }
     
 //------------------------------------------------- Surcharge d'opérateurs

@@ -34,7 +34,7 @@ public:
     //
     // Contrat :
     //
-    void setIPAdress(string s);
+    /*void setIPAdress(string s);
     void setUserLogname(string s);
     void setAuthenticatedUser(string s);
     void setDate(string s);
@@ -42,7 +42,11 @@ public:
     void setReturnCode(string s);
     void setDataTransfered(string s);
     void setReferer(string s);
-    void setClientNavigateur(string s);
+    void setClientNavigateur(string s);*/
+    
+    string getIPAdress();
+
+    friend class Lecture;
 
     //------------------------------------------------- Surcharge d'opérateurs
    // Ligne & operator = ( const Ligne & unLigne );
