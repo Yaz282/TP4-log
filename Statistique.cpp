@@ -110,34 +110,17 @@ void Statistique::Afficher()
     }
 }
 
-/*bool Statistique::sortbysecdesc(const pair<int,int> &a, const pair<int,int> &b)
-{
-    return a.second>b.second;
-}*/
-
 void Statistique::Top()
 {
-   /*sort(consultation.begin(), consultation.end(), sortbysecdesc);
-
-   Cons::iterator itr = consultation.begin();
-   int compteur = 0;
-   while( itr!=consultation.end() && compteur<10)
-   {
-        cout << itr->first <<" (" << itr->second <<" hits)" << endl;
-        ++itr;
-   }*/
-
+   
     vector<std::pair<string, int> > arr;
-    /*for (const auto &item : consultation) {
-        arr.emplace_back(item);
-    }*/
+    
     map<string, int>::iterator itr;
     for (itr = consultation.begin(); itr != consultation.end(); itr++)
     {
         arr.push_back(make_pair(itr->first,itr->second));
     }
 
-    //sort(arr.begin(), arr.end(), [] ( const pair<string,int> &a, const pair<string,int> &b) { return a.second>b.second; });
     sort(arr.begin(), arr.end(), sortbysecdesc);
 
     int compteur=0;
@@ -146,6 +129,57 @@ void Statistique::Top()
         cout << arr[compteur].first <<" (" << arr[compteur].second <<" hits)" << endl;
         compteur++;
     }
+}
+
+void Statistique::Graphe(string nomFichier)
+{
+
+    Dico::iterator itr;   // For accessing outer map
+    Cons::iterator ptr;   // For accessing inner map
+    Cons graphe;
+    int compteur=0;
+
+    //on remplit le graphe avec les cibles et les referer
+    for (itr = carte.begin(); itr != carte.end(); itr++) {
+        graphe.insert(make_pair(itr->first,compteur));
+        compteur++;
+        for (ptr = itr->second.begin(); ptr != itr->second.end(); ptr++) {
+            graphe.insert(make_pair(ptr->first,compteur));
+            compteur++;
+        }
+    }
+
+    ofstream file (nomFichier); //ouverture du fichier nomFichier
+    streambuf *oldCoutBuffer = cout.rdbuf ( file.rdbuf ( ) ); //redirection du streambuffer
+    if(!file) //teste si le fichier n'a pas pu s'ouvrir
+    {
+        cout <<"Erreur ouverture fichier"<<endl;
+    } else {
+        cout <<"digraph {" << endl;
+
+        Cons::iterator ctr;
+
+        //affichage des noeuds
+        for (ctr = graphe.begin(); ctr != graphe.end(); ctr++) {
+            cout << "node" << ctr->second << " [label=\"" << ctr->first << " \"];" << endl;
+        }
+        
+        //affichage des arcs
+        for (itr = carte.begin(); itr != carte.end(); itr++) {
+            for (ptr = itr->second.begin(); ptr != itr->second.end(); ptr++) {
+                
+                ctr=graphe.find(ptr->first);
+                cout << "node"<<ctr->second;
+                ctr=graphe.find(itr->first);
+                cout <<" -> node" <<ctr->second <<" [label= " <<ptr->second <<" ];" <<endl;
+            }
+        }
+        cout << "}" << endl;
+
+    }
+
+    cout.rdbuf ( oldCoutBuffer ); // Restauration du stream buffer par défaut pour cout 
+    file.close(); //Fermeture de nomFichier
 }
 
 //------------------------------------------------- Surcharge d'opérateurs

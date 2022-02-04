@@ -21,8 +21,11 @@ int main()
 	stat.Ajouter(livre);
 	livre.Lire();
 	stat.Ajouter(livre);
-	stat.Afficher();
+	livre.Lire();
+	stat.Ajouter(livre);
+	//stat.Afficher();
 	stat.Top();
+	stat.Graphe("graphe.dot");
 
 	return 0;
 }

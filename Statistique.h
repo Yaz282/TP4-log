@@ -45,6 +45,8 @@ public:
 
     static bool sortbysecdesc(const pair<string,int> &a, const pair<string,int> &b);
 
+    void Graphe(string nomFichier);
+
 
 //------------------------------------------------- Surcharge d'opérateurs
     //Statistique & operator = ( const Statistique & unStatistique );

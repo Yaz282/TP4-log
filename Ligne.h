@@ -91,6 +91,8 @@ string ReturnCode;
 string DataTransfered;
 string Referer;
 string ClientNavigateur;
+string extension;
+string heure;
 
 };
 

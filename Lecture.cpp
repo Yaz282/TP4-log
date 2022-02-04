@@ -66,7 +66,7 @@ void Lecture::Lire()
 
 string Lecture::getIPAdress()
 {
-    return ligne.IPAdress;
+    return ligne.Date;
 }
 
 
