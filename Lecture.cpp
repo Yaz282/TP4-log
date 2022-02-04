@@ -59,15 +59,36 @@ void Lecture::Lire()
         getline(file,texte,'"');
         getline(file,texte,'"');
         ligne.ClientNavigateur=texte;
-
+        ligne.createExtension();
+        ligne.createHour();
+    }
+    else{
+        cout<<"ERREUR : La ligne n'a pas pu être lue "<<endl;
     }
 
 }
 
+
+
 string Lecture::getIPAdress()
 {
-    return ligne.Date;
+    return ligne.IPAdress;
 }
+string Lecture::getExtension()
+{
+    return ligne.extension;
+}
+
+string Lecture::getHeure()
+{
+    return ligne.hour;
+}
+
+ifstream & Lecture::getFile()
+{
+    return file;
+}
+
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -99,7 +120,18 @@ Lecture::Lecture ( string nomFichier )
 #ifdef MAP
     cout << "Appel au constructeur de <Lecture>" << endl;
 #endif
+string extFich;
+ligne.createString(nomFichier,extFich,'.',' ');
+if(extFich=="log"){
     file.open(nomFichier);
+        if (!file)
+    {
+        cout << "ERREUR : Le fichier n'a pas été ouvert" << endl;
+    }
+}
+else{
+    cout<<"Le fichier en entrée n'est pas un .log !"<<endl;
+}
 } //----- Fin de Lecture
 
 

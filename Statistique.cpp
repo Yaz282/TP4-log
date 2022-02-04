@@ -18,6 +18,7 @@ using namespace std;
 #include "Statistique.h"
 #include <map>
 #include <vector>
+#include <algorithm>
 
 //------------------------------------------------------------- Constantes
 

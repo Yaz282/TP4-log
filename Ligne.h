@@ -46,6 +46,9 @@ public:
     
     string getDestUrl();
     string getReferer();
+    void createHour();
+    void createExtension();
+    void createString(const string & input, string & output , char del1, char del2);
 
     friend class Lecture;
 
@@ -92,7 +95,7 @@ string DataTransfered;
 string Referer;
 string ClientNavigateur;
 string extension;
-string heure;
+string hour;
 
 };
 

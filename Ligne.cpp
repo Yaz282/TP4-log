@@ -14,6 +14,8 @@
 #include <iostream>
 using namespace std;
 #include <string>
+#include <sstream>
+
 
 //------------------------------------------------------ Include personnel
 #include "Ligne.h"
@@ -65,21 +67,37 @@ using namespace std;
     {
         return Referer;
     }
-    
-//------------------------------------------------- Surcharge d'opérateurs
-/*Ligne & Ligne::operator = ( const Ligne & unLigne )
+    void Ligne::createHour(){
+        createString(Date,hour,':',':');
+    }
+
+    void Ligne::createExtension(){
+        createString(DestUrl, extension,'.',' ');
+    }
+
+    void Ligne::createString(const string & input, string & output , char del1, char del2 ){
+        string temp;
+        stringstream input_stringstream(input);
+
+        getline(input_stringstream, temp, del1);
+        getline(input_stringstream, output, del2);
+    }
+
+
+
+    //------------------------------------------------- Surcharge d'opérateurs
+    /*Ligne & Ligne::operator = ( const Ligne & unLigne )
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 */
 
-
-//-------------------------------------------- Constructeurs - destructeur
-Ligne::Ligne ( const Ligne & unLigne )
-// Algorithme :
-//
-{
+    //-------------------------------------------- Constructeurs - destructeur
+    Ligne::Ligne(const Ligne &unLigne)
+    // Algorithme :
+    //
+    {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Ligne>" << endl;
 #endif
@@ -110,3 +128,4 @@ Ligne::~Ligne ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+

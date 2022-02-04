@@ -42,6 +42,12 @@ public:
     //
 
     string getIPAdress();
+    ifstream & getFile();
+    string getExtension();
+    string getHeure();
+
+    
+
 
     friend class Statistique;
 
