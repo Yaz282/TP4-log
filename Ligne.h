@@ -44,7 +44,8 @@ public:
     void setReferer(string s);
     void setClientNavigateur(string s);*/
     
-    string getIPAdress();
+    string getDestUrl();
+    string getReferer();
 
     friend class Lecture;
 

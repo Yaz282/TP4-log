@@ -56,9 +56,14 @@ using namespace std;
         ClientNavigateur=s;
     }*/
 
-    string Ligne::getIPAdress()
+    string Ligne::getDestUrl()
     {
-        return IPAdress;
+        return DestUrl;
+    }
+
+    string Ligne::getReferer()
+    {
+        return Referer;
     }
     
 //------------------------------------------------- Surcharge d'opérateurs

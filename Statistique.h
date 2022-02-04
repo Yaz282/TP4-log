@@ -11,6 +11,10 @@
 #define Statistique_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "Ligne.h"
+#include "Lecture.h"
+#include <map>
+#include <vector>
 
 //------------------------------------------------------------- Constantes
 
@@ -22,7 +26,7 @@
 //
 //------------------------------------------------------------------------
 
-class Statistique :
+class Statistique
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,7 +37,13 @@ public:
     //
     // Contrat :
     //
-    void Ajouter(Ligne & ligne);
+    void Ajouter(Lecture & livre);
+
+    void Afficher();
+
+    void Top();
+
+    static bool sortbysecdesc(const pair<string,int> &a, const pair<string,int> &b);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -69,8 +79,11 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-    typedef map <string, pair< map<string,int>, int> > Dico;
-    Dico tdico;
+    //typedef map <string, pair< map<string,int>, int> > Dico;
+    typedef map <string, map<string,int> > Dico;
+    Dico carte;
+    typedef map <string,int>  Cons;
+    Cons consultation;
 
 };
 

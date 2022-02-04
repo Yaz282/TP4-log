@@ -43,6 +43,8 @@ public:
 
     string getIPAdress();
 
+    friend class Statistique;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
    // Lecture & operator = ( const Lecture & unLecture );
