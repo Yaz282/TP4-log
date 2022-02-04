@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
 				continue;
 			}
 		}
-
+		if (fichLog.getFile().eof() ) break;
 		stat.Ajouter(fichLog);
 
 		// Ajouter ma ligne à ma structure de donnée : elle a passé les différents tests
