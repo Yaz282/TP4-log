@@ -14,6 +14,7 @@
 #include <iostream>
 using namespace std;
 #include <fstream>
+#include <sstream>
 
 //------------------------------------------------------ Include personnel
 #include "Lecture.h"
@@ -44,7 +45,7 @@ void Lecture::Lire()
         getline(file,texte,']');
         ligne.Date=texte;
         getline(file,texte,'"');
-        getline(file,texte,' ');
+        getline(file,texte,'/');
         getline(file,texte,' ');
         ligne.DestUrl=texte;
         getline(file,texte,'"');
@@ -61,6 +62,17 @@ void Lecture::Lire()
         ligne.ClientNavigateur=texte;
         ligne.createExtension();
         ligne.createHour();
+
+        //vérifier si base de l'url de DestUrl est locale
+        string local = "http://intranet-if.insa-lyon.fr";
+        if (ligne.Referer.find(local) != string::npos) {
+            stringstream input_stringstream(ligne.Referer);
+
+            getline(input_stringstream, ligne.Referer, '/');
+            getline(input_stringstream, ligne.Referer, '/');
+            getline(input_stringstream, ligne.Referer, '/');
+            getline(input_stringstream, ligne.Referer, ' ');
+        }
     }
     else{
         cout<<"ERREUR : La ligne n'a pas pu être lue "<<endl;
