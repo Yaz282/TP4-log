@@ -5,9 +5,20 @@ using namespace std;
 #include "Statistique.h"
 #include <string> 
 #include<cstring>
+#include <sstream>
 
-typedef struct Commande {
-    bool Arg_t=false; 
+
+  void createString(const string & input, string & output , char del1, char del2 ){
+        string temp;
+        stringstream input_stringstream(input);
+
+        getline(input_stringstream, temp, del1);
+        getline(input_stringstream, output, del2);
+    }
+
+typedef struct Commande
+{
+	bool Arg_t=false; 
     bool Arg_e=false;
     bool Arg_g=false;
 	string fichDot;
@@ -22,19 +33,52 @@ int main(int argc, char* argv[])
 
 	// Mise a jour des flags
 	Commande flags;
-	for(int i=0;i<argc;i++){ // Gestion des erreurs à faire
-		if(!strcmp(argv[i],"-g")){
-			flags.Arg_g=true;
-			flags.fichDot=argv[i+1];
+	for(int i=0;i<argc;i++){
+		if (!strcmp(argv[i], "-g"))
+		{
+			string extFich;
+			createString(argv[i + 1], extFich, '.', ' ');
+			if (extFich == "dot")
+			{
+				flags.Arg_g = true;
+				flags.fichDot = argv[i + 1];
+			}
+			else
+			{
+				cout << "Une commande -g n'a pas été prise en compte, le nom de Fichier entrée n'est pas un .dot" << endl;
+			}
 		}
-		if(!strcmp(argv[i],"-t")){
-			flags.Arg_t=true;
-			flags.heure=argv[i+1];
-		}	
+
+		if (!strcmp(argv[i], "-t"))
+		{
+			string tmp(argv[i+1]);
+			if (tmp.find_first_not_of("0123456789") == string::npos) // Si la commande est suivi par un nombre positif
+			{
+				if((stoi(argv[i+1])<24 )){
+					flags.Arg_t = true;
+					flags.heure = argv[i + 1];
+				}
+				else{
+					cout << "ERREUR , une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas comprise entre 0 et 23"<<endl;
+				}
+			}
+			else
+			{
+				cout << "ERREUR, une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas valide"<<endl;
+			}
+		}
 
 		if(!strcmp(argv[i],"-e")){
 			flags.Arg_e=true;
-		}	
+		}
+	}
+	if (flags.Arg_g)
+	{
+		cout << "Dot-file "<< flags.fichDot <<" generated"<<endl;
+	}
+	if (flags.Arg_t)
+	{
+		cout<< "Warning : only hits between " << stoi(flags.heure)  << "h and " << stoi(flags.heure)+1<<"h have been taken into account"<<endl;
 	}
 
 	string nomFichier = argv[argc-1];
@@ -42,9 +86,10 @@ int main(int argc, char* argv[])
 	Lecture fichLog(nomFichier);
 
 	Statistique stat = Statistique();
-	cout << flags.Arg_e<<endl;
+	
+	/*cout << flags.Arg_e<<endl;
 	cout << flags.Arg_t<<endl;
-	cout << flags.Arg_g<<endl;
+	cout << flags.Arg_g<<endl;*/
 
 	while (!fichLog.getFile().eof() && fichLog.getFile()) // Remplir ma structure de donnée avec les bonnes lignes
 	{
