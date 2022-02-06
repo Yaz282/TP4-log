@@ -8,13 +8,13 @@ using namespace std;
 #include <sstream>
 
 
-  void createString(const string & input, string & output , char del1, char del2 ){
+  /*void createString(const string & input, string & output , char del1, char del2 ){
         string temp;
         stringstream input_stringstream(input);
 
         getline(input_stringstream, temp, del1);
         getline(input_stringstream, output, del2);
-    }
+    }*/
 
 typedef struct Commande
 {
@@ -36,9 +36,12 @@ int main(int argc, char* argv[])
 	for(int i=0;i<argc;i++){
 		if (!strcmp(argv[i], "-g"))
 		{
-			string extFich;
-			createString(argv[i + 1], extFich, '.', ' ');
-			if (extFich == "dot")
+			//string extFich;
+			//createString(argv[i + 1], extFich, '.', ' ');
+			string ext = ".dot";
+			string fichier(argv[i+1]);
+			//if (extFich == "dot")
+			if (fichier.find(ext) != string::npos)
 			{
 				flags.Arg_g = true;
 				flags.fichDot = argv[i + 1];
@@ -112,7 +115,7 @@ int main(int argc, char* argv[])
 		// Ajouter ma ligne à ma structure de donnée : elle a passé les différents tests
 	}
 
-	stat.Afficher();
+	//stat.Afficher();
 
 	// Afficher le top 10 de ma structure de donnée
 	stat.Top();
@@ -127,46 +130,3 @@ int main(int argc, char* argv[])
 	return 0;
 
 }
-
-/*#include <iostream>
-using namespace std;
-#include "Lecture.h"
-
-typedef struct Commande {
-    bool Arg_t=0; 
-    bool Arg_e=0;
-    bool Arg_g=0;
-} Commande; // Peu importe l'ordre des commandes 
-
-int main(int argc, char *argv[])
-{
-    // Définir les commandes 
-    string nomFichier;
-    cin>>nomFichier;
-    Lecture fichLog (nomFichier);
-    while(!fichLog.getFile().eof()){
-        fichLog.Lire();
-        if(){
-
-        }
-
-    }
-    return 0;
-}*/
-
-	/*Lecture livre = Lecture(nomFichier.c_str());
-	livre.Lire();
-	string Ip = livre.getIPAdress();
-	cout << Ip << endl;
-	Statistique stat = Statistique();
-	stat.Ajouter(livre);
-	livre.Lire();
-	stat.Ajouter(livre);
-	livre.Lire();
-	stat.Ajouter(livre);
-	livre.Lire();
-	stat.Ajouter(livre);
-	livre.Lire();
-	stat.Ajouter(livre);
-	stat.Afficher();
-	stat.Top();*/

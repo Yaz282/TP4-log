@@ -132,9 +132,12 @@ Lecture::Lecture ( string nomFichier )
 #ifdef MAP
     cout << "Appel au constructeur de <Lecture>" << endl;
 #endif
-string extFich;
-ligne.createString(nomFichier,extFich,'.',' ');
-if(extFich=="log"){
+//string extFich;
+//ligne.createString(nomFichier,extFich,'.',' ');
+string ext = ".log";
+//if(extFich=="log")
+if(nomFichier.find(ext) != string::npos)
+{
     file.open(nomFichier);
         if (!file)
     {
