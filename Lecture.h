@@ -45,6 +45,7 @@ public:
     ifstream & getFile();
     string getExtension();
     string getHeure();
+    string getReturnCode();
 
     
 

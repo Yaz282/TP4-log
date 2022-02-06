@@ -80,8 +80,6 @@ void Lecture::Lire()
 
 }
 
-
-
 string Lecture::getIPAdress()
 {
     return ligne.IPAdress;
@@ -96,22 +94,15 @@ string Lecture::getHeure()
     return ligne.hour;
 }
 
+string Lecture::getReturnCode()
+{
+    return ligne.ReturnCode;
+}
+
 ifstream & Lecture::getFile()
 {
     return file;
 }
-
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-// Algorithme :
-//
-/*Lecture & Lecture::operator = ( const Statistique & unStatistique )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-*/
 
 
 //-------------------------------------------- Constructeurs - destructeur

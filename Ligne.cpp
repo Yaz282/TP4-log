@@ -30,33 +30,6 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-    /*void Ligne::setIPAdress(string s){
-        IPAdress=s;
-    }
-    void Ligne::setUserLogname(string s){
-        UserLogname=s;
-    }
-    void Ligne::setAuthenticatedUser(string s){
-        AuthenticatedUser=s;
-    }
-    void Ligne::setDate(string s){
-        Date=s;
-    }
-    void Ligne::setDestUrl(string s){
-        DestUrl=s;
-    }
-    void Ligne::setReturnCode(string s){
-        ReturnCode=s;
-    }
-    void Ligne::setDataTransfered(string s){
-        DataTransfered=s;
-    }
-    void Ligne::setReferer(string s){
-        Referer=s;
-    }
-    void Ligne::setClientNavigateur(string s){
-        ClientNavigateur=s;
-    }*/
 
     string Ligne::getDestUrl()
     {
@@ -68,30 +41,26 @@ using namespace std;
         return Referer;
     }
     void Ligne::createHour(){
-        createString(Date,hour,':',':');
+        string temp;
+        stringstream input_stringstream(Date);
+
+        getline(input_stringstream, temp, ':');
+        getline(input_stringstream, hour, ':');
     }
 
     void Ligne::createExtension(){
-        createString(DestUrl, extension,'.',' ');
+        string ext1 = ".jpg";
+        string ext2 = ".png";
+        string ext3 = ".gif";
+        string ext4 = ".css";
+        string ext5 = ".js";
+        if ( DestUrl.find(ext1) != string::npos || DestUrl.find(ext2) != string::npos || DestUrl.find(ext3) != string::npos || DestUrl.find(ext4) != string::npos || DestUrl.find(ext5) != string::npos )
+        {
+            extension = "present";
+        } else {
+            extension = "absent";
+        }
     }
-
-    void Ligne::createString(const string & input, string & output , char del1, char del2 ){
-        string temp;
-        stringstream input_stringstream(input);
-
-        getline(input_stringstream, temp, del1);
-        getline(input_stringstream, output, del2);
-    }
-
-
-
-    //------------------------------------------------- Surcharge d'opérateurs
-    /*Ligne & Ligne::operator = ( const Ligne & unLigne )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-*/
 
     //-------------------------------------------- Constructeurs - destructeur
     Ligne::Ligne(const Ligne &unLigne)

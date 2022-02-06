@@ -34,31 +34,14 @@ public:
     //
     // Contrat :
     //
-    /*void setIPAdress(string s);
-    void setUserLogname(string s);
-    void setAuthenticatedUser(string s);
-    void setDate(string s);
-    void setDestUrl(string s);
-    void setReturnCode(string s);
-    void setDataTransfered(string s);
-    void setReferer(string s);
-    void setClientNavigateur(string s);*/
     
     string getDestUrl();
     string getReferer();
     void createHour();
     void createExtension();
-    void createString(const string & input, string & output , char del1, char del2);
+    //void createString(const string & input, string & output , char del1, char del2);
 
     friend class Lecture;
-
-    //------------------------------------------------- Surcharge d'opérateurs
-   // Ligne & operator = ( const Ligne & unLigne );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
     Ligne ( const Ligne & unLigne );

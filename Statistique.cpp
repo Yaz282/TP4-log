@@ -33,7 +33,12 @@ using namespace std;
 
 bool Statistique::sortbysecdesc(const pair<string,int> &a, const pair<string,int> &b)
 {
-    return a.second>b.second;
+    if(a.second==b.second)
+    {
+        return a.first<b.first;
+    } else {
+        return a.second>b.second;
+    }
 }
 
 void Statistique::Ajouter ( Lecture & livre)
@@ -93,21 +98,6 @@ void Statistique::Ajouter ( Lecture & livre)
         carte.insert(make_pair(dest, map<string, int>()));
         carte[dest].insert(make_pair(referer, 1));
         consultation.insert(make_pair(dest,1));
-    }
-}
-
-void Statistique::Afficher()
-{
-    map<string, map<string, int> >::iterator itr;   // For accessing outer map
-    map<string, int>::iterator ptr;                // For accessing inner map
-
-    for (itr = carte.begin(); itr != carte.end(); itr++) {
-  
-        for (ptr = itr->second.begin(); ptr != itr->second.end(); ptr++) {
-            cout << "La cible est " << itr->first
-                 << " et le referer est " << ptr->first
-                 << " et le nombre de hit est " << ptr->second << endl;
-        }
     }
 }
 
@@ -182,15 +172,6 @@ void Statistique::Graphe(string nomFichier)
     cout.rdbuf ( oldCoutBuffer ); // Restauration du stream buffer par défaut pour cout 
     file.close(); //Fermeture de nomFichier
 }
-
-//------------------------------------------------- Surcharge d'opérateurs
-/*Statistique & Statistique::operator = ( const Statistique & unStatistique )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-*/
-
 
 //-------------------------------------------- Constructeurs - destructeur
 Statistique::Statistique ( const Statistique & unStatistique )

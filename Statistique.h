@@ -39,21 +39,11 @@ public:
     //
     void Ajouter(Lecture & livre);
 
-    void Afficher();
-
     void Top();
 
     static bool sortbysecdesc(const pair<string,int> &a, const pair<string,int> &b);
 
     void Graphe(string nomFichier);
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    //Statistique & operator = ( const Statistique & unStatistique );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 
 //-------------------------------------------- Constructeurs - destructeur

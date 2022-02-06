@@ -27,9 +27,6 @@ typedef struct Commande
 
 int main(int argc, char* argv[])
 {
-	/*for(int i=0;i<argc;i++){ 
-		cout<<argv[i]<<endl;
-	}*/
 
 	// Mise a jour des flags
 	Commande flags;
@@ -48,7 +45,7 @@ int main(int argc, char* argv[])
 			}
 			else
 			{
-				cout << "Une commande -g n'a pas été prise en compte, le nom de Fichier entrée n'est pas un .dot" << endl;
+				cout << "Warning : une commande -g n'a pas été prise en compte, le nom de Fichier entrée n'est pas un .dot" << endl;
 			}
 		}
 
@@ -62,12 +59,12 @@ int main(int argc, char* argv[])
 					flags.heure = argv[i + 1];
 				}
 				else{
-					cout << "ERREUR , une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas comprise entre 0 et 23"<<endl;
+					cout << "Warning : une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas comprise entre 0 et 23"<<endl;
 				}
 			}
 			else
 			{
-				cout << "ERREUR, une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas valide"<<endl;
+				cout << "Warning : une commande -t n'a pas été prise en compte : l'heure indiquée n'est pas valide"<<endl;
 			}
 		}
 
@@ -85,22 +82,17 @@ int main(int argc, char* argv[])
 	}
 
 	string nomFichier = argv[argc-1];
-	/*cin >> nomFichier;*/
 	Lecture fichLog(nomFichier);
 
 	Statistique stat = Statistique();
-	
-	/*cout << flags.Arg_e<<endl;
-	cout << flags.Arg_t<<endl;
-	cout << flags.Arg_g<<endl;*/
 
 	while (!fichLog.getFile().eof() && fichLog.getFile()) // Remplir ma structure de donnée avec les bonnes lignes
 	{
 		fichLog.Lire();
-		//cout<<fichLog.getExtension()<<endl;
+		if(fichLog.getReturnCode() >= "400") continue;
 
 		if (flags.Arg_e){ // Si -e 
-			if(fichLog.getExtension()=="jpg" || fichLog.getExtension()=="png"||fichLog.getExtension()=="gif"||fichLog.getExtension()=="js"||fichLog.getExtension()=="css"){//Si l'extension est à supprimer
+			if(fichLog.getExtension()=="present"){ //Si l'extension est à supprimer
 				continue;
 			}
 		}
@@ -114,8 +106,6 @@ int main(int argc, char* argv[])
 
 		// Ajouter ma ligne à ma structure de donnée : elle a passé les différents tests
 	}
-
-	//stat.Afficher();
 
 	// Afficher le top 10 de ma structure de donnée
 	stat.Top();
