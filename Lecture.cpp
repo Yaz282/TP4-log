@@ -24,11 +24,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Lecture::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 void Lecture::Lire()
 {
@@ -60,14 +55,14 @@ void Lecture::Lire()
         getline(file,texte,'"');
         getline(file,texte,'"');
         ligne.ClientNavigateur=texte;
-        ligne.createExtension();
-        ligne.createHour();
+        ligne.createExtension(); //on détermine si la destination est une image, un fichier css ou javascript, ou autre chose
+        ligne.createHour(); //on détermine l'heure de la requête
 
         //vérifier si base de l'url de DestUrl est locale
         string local = "http://intranet-if.insa-lyon.fr";
         if (ligne.Referer.find(local) != string::npos) {
+            //Si elle est locale, on supprime la base de l'url de DestUrl
             stringstream input_stringstream(ligne.Referer);
-
             getline(input_stringstream, ligne.Referer, '/');
             getline(input_stringstream, ligne.Referer, '/');
             getline(input_stringstream, ligne.Referer, '/');
@@ -77,38 +72,36 @@ void Lecture::Lire()
     else{
         cout<<"ERREUR : La ligne n'a pas pu être lue "<<endl;
     }
-
-}
+} //----- Fin de Lire
 
 string Lecture::getIPAdress()
 {
     return ligne.IPAdress;
-}
+} //----- Fin de getIPAdress
+
 string Lecture::getExtension()
 {
     return ligne.extension;
-}
+} //----- Fin de etExtension
 
 string Lecture::getHeure()
 {
     return ligne.hour;
-}
+} //----- Fin de getHeure
 
 string Lecture::getReturnCode()
 {
     return ligne.ReturnCode;
-}
+} //----- Fin de getReturnCode
 
 ifstream & Lecture::getFile()
 {
     return file;
-}
+} //----- Fin de getFile
 
 
 //-------------------------------------------- Constructeurs - destructeur
 Lecture::Lecture ( const Lecture & unLecture )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Xxx>" << endl;
@@ -123,27 +116,20 @@ Lecture::Lecture ( string nomFichier )
 #ifdef MAP
     cout << "Appel au constructeur de <Lecture>" << endl;
 #endif
-//string extFich;
-//ligne.createString(nomFichier,extFich,'.',' ');
 string ext = ".log";
-//if(extFich=="log")
 if(nomFichier.find(ext) != string::npos)
 {
     file.open(nomFichier);
-        if (!file)
-    {
+    if (!file) {
         cout << "ERREUR : Le fichier n'a pas été ouvert" << endl;
     }
-}
-else{
+} else {
     cout<<"Le fichier en entrée n'est pas un .log !"<<endl;
 }
 } //----- Fin de Lecture
 
 
 Lecture::~Lecture ( )
-// Algorithme :
-//
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Lecture>" << endl;
